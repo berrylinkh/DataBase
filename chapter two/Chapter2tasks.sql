@@ -123,6 +123,118 @@
 -- The having is applied after the the group by because it filter the gropus based on the condition applied after grouping
 
 
+-- 2.40
+-- SELECT SKU,SKU_Description, WarehouseCity, WAREHOUSE.WarehouseID
+-- FROM INVENTORY, WAREHOUSE
+-- WHERE WarehouseCity = 'Atlantic' 
+-- OR WarehouseCity = 'Bangor'
+-- OR WarehouseCity = 'Chicago' 
+
+-- 2.41
+-- SELECT SKU,SKU_Description, WarehouseCity, WAREHOUSE.WarehouseID
+-- FROM INVENTORY, WAREHOUSE
+-- WHERE WarehouseCity IN (
+--     SELECT WarehouseCity
+--     FROM WAREHOUSE
+--     WHERE WarehouseCity = 'Atlantic' 
+-- OR WarehouseCity = 'Bangor'
+-- OR WarehouseCity = 'Chicago') 
+
+-- 2.42
+-- SELECT SKU,SKU_Description, WarehouseCity, WAREHOUSE.WarehouseID
+-- FROM INVENTORY, WAREHOUSE
+-- WHERE WarehouseCity IN (
+--     SELECT WarehouseCity
+--     FROM WAREHOUSE
+--     WHERE WarehouseCity <> 'Atlantic' 
+-- AND WarehouseCity <> 'Bangor'
+-- AND WarehouseCity <> 'Chicago') 
+
+-- 2.43
+-- SELECT SKU,SKU_Description, WarehouseCity, WAREHOUSE.WarehouseID
+-- FROM INVENTORY, WAREHOUSE
+-- WHERE WarehouseCity NOT IN (
+--     SELECT WarehouseCity
+--     FROM WAREHOUSE
+--     WHERE WarehouseCity = 'Atlantic' 
+-- OR WarehouseCity = 'Bangor'
+-- OR WarehouseCity = 'Chicago') 
+
+-- 2.44
+-- SELECT CONCAT(SKU_Description,  ' IS LOCATED IN ', WarehouseCity) AS ItemLocation
+-- FROM INVENTORY, WAREHOUSE
+-- WHERE INVENTORY.WarehouseID = WAREHOUSE.WarehouseID;
+
+-- 2.45
+-- SELECT SKU,SKU_Description, WarehouseID
+-- FROM INVENTORY
+-- WHERE  (
+--  SELECT WarehouseID
+-- FROM WAREHOUSE
+-- WHERE MANAGER = 'LUCILLE SMITH' 
+-- )
+
+-- 2.46
+-- SELECT SKU,SKU_Description, WAREHOUSE.WarehouseID
+-- FROM INVENTORY, WAREHOUSE
+-- WHERE INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+-- AND Manager = 'LUCILLE SMITH'
+ 
+
+-- 2.47
+-- SELECT SKU,SKU_Description, WAREHOUSE.WarehouseID
+-- FROM INVENTORY
+-- JOIN WAREHOUSE
+-- ON INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+-- AND Manager = 'LUCILLE SMITH'
+ 
+--  2.48
+-- SELECT WarehouseID , AVG (QUANTITYONHAND) AS AVERAGEQUANTITY
+-- FROM INVENTORY
+-- WHERE WarehouseID IN (
+--     SELECT WarehouseID 
+--     FROM WAREHOUSE
+--     WHERE MANAGER = 'LUCILLE SMITH'
+-- )
+-- GROUP BY WAREHOUSEID
+
+-- 2.49
+-- SELECT INVENTORY.WarehouseID , AVG (QUANTITYONHAND) AS AVERAGEQUANTITY
+-- FROM INVENTORY, WAREHOUSE
+-- WHERE INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+-- AND MANAGER = 'LUCILLE SMITH'
+-- GROUP BY INVENTORY.WarehouseID
+
+-- 2.50
+-- SELECT INVENTORY.WarehouseID , AVG (QUANTITYONHAND) AS AVERAGEQUANTITY
+-- FROM INVENTORY
+-- JOIN WAREHOUSE
+-- ON INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+-- AND MANAGER = 'LUCILLE SMITH'
+-- GROUP BY INVENTORY.WarehouseID
+
+-- 2.51
+-- SELECT SKU,SKU_Description, WarehouseCity, WAREHOUSE.WarehouseID
+-- FROM INVENTORY, WAREHOUSE
+-- WHERE INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+-- AND MANAGER ='LUCILLE SMITH'
+
+-- 2.52
+-- SELECT WarehouseID, SUM(QuantityOnOrder) AS TotalItemsOnOrder, SUM(QuantityOnHand) AS TotalItemsOnHand
+-- FROM INVENTORY
+-- GROUP BY WarehouseID,QuantityOnOrder
+
+-- 2.53
+-- subquery cannot be use in 2.52 because all required table comes  from single table, subqurey is use to filter or calculate data.
+
+-- 2.54
+-- Join combines column from two or more tables into one wider tables matching column
+-- subquery is run the inner query first, and pass the result to the outer query to filter or calculate data
+
+-- 2.55
+-- SELECT DISTINCT*
+-- FROM INVENTORY
+-- JOIN WAREHOUSE
 
 
 
